@@ -47,6 +47,14 @@ td .marker {
   font-size: 8em;
 }
 
+.token {
+  max-width: 90%;
+  max-height: 90%;
+  display: block;
+  margin: 0 auto;
+  margin-top: 5%;
+}
+
 .hidden {
   visibility: hidden;
 }

@@ -11,6 +11,10 @@
 //victory message
 let $board;
 
+//Values hold the tokens for either player as a detached jQuery object
+let $tokenX = '<img src="images/cross.png" alt="" class="token">'
+let $tokenO = '<img src="images/circle.png" alt="" class="token">'
+
 const render = function () {
   if (gameBoard.winner !== '') {
     //display win + reset button
@@ -29,17 +33,27 @@ const render = function () {
   } else {
     $('#whos-turn').text(`It's ${gameBoard.nextTurn}'s turn`)
     // render box content
-    $('#1').text(gameBoard.c1);
-    $('#2').text(gameBoard.c2);
-    $('#3').text(gameBoard.c3);
-    $('#4').text(gameBoard.c4);
-    $('#5').text(gameBoard.c5);
-    $('#6').text(gameBoard.c6);
-    $('#7').text(gameBoard.c7);
-    $('#8').text(gameBoard.c8);
-    $('#9').text(gameBoard.c9);
+    printToken('c1', "#1")
+    printToken('c2', "#2")
+    printToken('c3', "#3")
+    printToken('c4', "#4")
+    printToken('c5', "#5")
+    printToken('c6', "#6")
+    printToken('c7', "#7")
+    printToken('c8', "#8")
+    printToken('c9', "#9")
   }
 };
+
+const printToken = function (c, cell) {
+  if (gameBoard[c] === '') {
+    $(cell).text('');
+  } else if (gameBoard[c] === 'X') {
+    $(cell).html($tokenX);
+  } else {
+    $(cell).html($tokenO);
+  }
+}
 
 const reset = function () {
   $("#win-message").remove();
