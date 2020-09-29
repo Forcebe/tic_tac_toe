@@ -2,9 +2,9 @@ TO Dos:
 
 MVPs
 Render a game board in the browser
-Switch turns between X and O (or whichever markers you select)
-Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
-Include separate HTML / CSS / JavaScript files
+!Switch turns between X and O (or whichever markers you select)
+!Visually display which side won if a player gets three in a row or show a draw/"cat’s game" if neither wins
+!Include separate HTML / CSS / JavaScript files
 Stick with KISS (Keep It Simple Stupid) and DRY (Don't Repeat Yourself) principles
 Use Javascript for DOM manipulation
 !Deploy your game online, where the rest of the world can access it
@@ -12,7 +12,6 @@ Use semantic markup for HTML and CSS (adhere to best practices)
 
 
 1. Improve MVP
-bugfix draw win coming up multiple times 
 Make text responsive
 Change JS to a render style JS with a sheet for the logic
 Look at ways to refactor JS to be neater
