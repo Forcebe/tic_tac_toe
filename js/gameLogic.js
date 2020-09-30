@@ -14,46 +14,52 @@ const gameBoard = {
   c8: '',
   c9: '',
 
+  player1: 'X',
+  player2: 'O',
+
+  lastTurn: 'O',
   nextTurn: 'X',
   winner: '',
 
   play: function (cell) {
     if (this[cell] !== '') {
 
-    } else if  (this.nextTurn === 'X') {
+    } else if  (this.nextTurn === this.player1) {
       this[cell] = 'X';
-      this.nextTurn = 'O';
+      this.lastTurn = this.player1
+      this.nextTurn = this.player2;
     } else {
       this[cell] = 'O';
-      this.nextTurn = 'X';
+      this.lastTurn = this.player2;
+      this.nextTurn = this.player1;
     }
   },
 
   winCheck: function() {
     //top row
     if (this.c1 != '' && this.c1 === this.c2 && this.c2 === this.c3) {
-      this.winner = this.c1
+      this.winner = this.lastTurn
     //first column
     } else if (this.c1 !== '' && this.c1 === this.c4 && this.c4 === this.c7) {
-      this.winner = this.c1
+      this.winner = this.lastTurn
     //middle Row
     } else if (this.c4 !== '' && this.c4 === this.c5 && this.c5 === this.c6) {
-      this.winner = this.c4
+      this.winner = this.lastTurn
     //second column
     } else if (this.c2 !== '' && this.c2 === this.c5 && this.c5 === this.c8) {
-      this.winner = this.c2
+      this.winner = this.lastTurn
     //bottom row
     } else if (this.c7 !== '' && this.c7 === this.c8 && this.c8 === this.c9) {
-      this.winner = this.c7
+      this.winner = this.lastTurn
     //third Column
     } else if (this.c3 !== '' && this.c3 === this.c6 && this.c6 === this.c9) {
-      this.winner = this.c3
+      this.winner = this.lastTurn
     //left diagonal
     } else if (this.c1 !== '' && this.c1 === this.c5 && this.c5 === this.c9) {
-      this.winner = this.c1
+      this.winner = this.lastTurn
     //right diagonal
     } else if (this.c3 !== '' && this.c3 === this.c5 && this.c5 === this.c7) {
-      this.winner = this.c3
+      this.winner = this.lastTurn
     //draw condition
     } else if (
       this.c1 !== '' &&

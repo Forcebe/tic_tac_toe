@@ -1,11 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=VT323&display=swap');
 
-
+* {
+  box-sizing: border-box;
+}
 
 body  {
   background-color: #4A4E69;
   font-family: 'Ubuntu', sans-serif;
   color: #C9ADA7;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 960px;
 }
 
 p {
@@ -30,12 +37,6 @@ h2 {
   font-size: 1em;
 }
 
-
-
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-}
 
 #game-board {
   max-width: 40%;
@@ -111,7 +112,7 @@ button {
   cursor: pointer;
   background-color: #9A8C98;
   color: #22223B;
-  border: none;
+  border: 5px solid #9A8C98;
   border-radius: 6px;
   box-sizing: border-box;
   font-size: 1.5em;
@@ -120,6 +121,12 @@ button {
 button:hover {
   border: 5px solid #22223B;
 
+}
+
+.menus button {
+  height: 45px;
+  font-size: 1em;
+  width: 200px;
 }
 
 .hidden {
@@ -136,4 +143,67 @@ footer p {
 footer a {
   text-decoration: none;
   color: #34345B;
+}
+
+.menus #localMode {
+    margin:0 auto;
+    text-align:center;
+
+}
+
+.menus #localMode div {
+  display: inline-block;
+  margin: 0 auto;
+  height: auto;
+}
+
+.menus .player-block {
+  display: inline-block;
+}
+
+.menus #localMode input {
+  display: block;
+  text-align: center;
+  width: 200px;
+  background-color: #22223B;
+  color: #827380;
+  border: none;
+  font-size: 1.3em;
+}
+
+::placeholder {
+  color: #615660;
+}
+
+
+.menus .player-token {
+  max-width: 200px;
+}
+
+.menus #p1 {
+  background: #f7b5b5;
+}
+
+.menus #p2 {
+  background: #ABAFC4;
+}
+
+.menus .player-token img {
+  max-width: 90%;
+  padding: 5%;
+}
+
+.menus #localMode .token-select  {
+  display: block;
+  margin: 0 auto;
+  font-size: 2em;
+}
+
+.menus .token-select i {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.menus .token-select i:hover {
+  color: #AA7E74;
+  cursor: pointer;
 }
