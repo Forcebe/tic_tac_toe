@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&family=VT323&display=swap');
+
+* {
+  /* border: 1px solid green; */
+  box-sizing: border-box;
+}
+
+body  {
+  background-color: #4A4E69;
+  font-family: 'Ubuntu', sans-serif;
+  color: #C9ADA7;
+}
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+}
+p {
+  text-align: center;
+  font-size: 1em
+}
+
+h1 {
+  text-align: center;
+  font-family: 'VT323', monospace;
+  color: #9A8C98;
+  font-size: 2em;
+  font-weight: lighter;
+}
+
+h1 span {
+  background-color: #22223B;
+}
+
+button {
+  display: block;
+  height: 45px;
+  margin: 0 auto;
+  margin-top: 15px;
+  padding: 10px 30px 10px 30px;
+  cursor: pointer;
+  background-color: #9A8C98;
+  color: #22223B;
+  border: 5px solid #9A8C98;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+button:hover {
+  border: 5px solid #22223B;
+}
+
+.hidden {
+  display: none;
+}
+
+footer {
+  text-align: center;
+}
+footer p {
+  font-size: 0.75em;
+  color: #666b8f;
+}
+footer a {
+  text-decoration: none;
+  color: #34345B;
+}
+
+#localMode {
+    margin:0 auto;
+    text-align:center;
+
+}
+
+#localMode div {
+  display: inline-block;
+  margin: 0 auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: auto;
+}
+
+.player-block {
+  display: inline-block;
+}
+
+#localMode input {
+  display: block;
+  text-align: center;
+  background-color: #22223B;
+  color: #827380;
+  border: none;
+  font-size: 1.3em;
+}
+
+::placeholder {
+  color: #615660;
+}
+
+
+.player-token {
+  max-width: 200px;
+}
+
+#p1 {
+  background: #f7b5b5;
+}
+
+#p2 {
+  background: #ABAFC4;
+}
+
+.player-token img {
+  max-width: 90%;
+  padding: 5%;
+}
+
+#localMode .token-select  {
+  display: block;
+  margin: 0 auto;
+  font-size: 2em;
+}
+
+.token-select i {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.token-select i:hover {
+  color: #AA7E74;
+  cursor: pointer;
+}

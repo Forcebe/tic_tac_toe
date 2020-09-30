@@ -17,32 +17,27 @@ let $tokenO = '<img src="images/circle.png" alt="" class="token">'
 
 const render = function () {
   if (gameBoard.winner !== '') {
-    //display win + reset button
-    $board = $("#game-board table").detach();
-    let $winMsg = $('<p id="win-message"></p>');
-    $('#whos-turn').addClass("hidden")
-
+    //disable clicks then display win + reset button
+    stopGame()
     if (gameBoard.winner !== 'draw') {
-      $winMsg.text(`Congratulations ${gameBoard.winner}. You win!`)
-
+      $('#messages').text(`Congratulations ${gameBoard.winner}. You win!`)
     } else {
-      $winMsg.text(`Cat's Game! It's a draw.`)
+      $('#messages').text(`Cat's Game! It's a draw.`)
     }
-    $('#game-board').prepend($winMsg)
     $('button').removeClass('hidden');
   } else {
-    $('#whos-turn').text(`It's ${gameBoard.nextTurn}'s turn`)
+    $('#messages').text(`It's ${gameBoard.nextTurn}'s turn`)
     // render box content
-    printToken('c1', "#1")
-    printToken('c2', "#2")
-    printToken('c3', "#3")
-    printToken('c4', "#4")
-    printToken('c5', "#5")
-    printToken('c6', "#6")
-    printToken('c7', "#7")
-    printToken('c8', "#8")
-    printToken('c9', "#9")
   }
+  printToken('c1', "#1")
+  printToken('c2', "#2")
+  printToken('c3', "#3")
+  printToken('c4', "#4")
+  printToken('c5', "#5")
+  printToken('c6', "#6")
+  printToken('c7', "#7")
+  printToken('c8', "#8")
+  printToken('c9', "#9")
 };
 
 const printToken = function (c, cell) {
@@ -57,8 +52,8 @@ const printToken = function (c, cell) {
 
 const reset = function () {
   $("#win-message").remove();
-  $('#whos-turn').removeClass("hidden");
   $('button').addClass('hidden');
+  $('#game-board div').removeClass('X O').addClass('marker')
   gameBoard.c1 = '';
   gameBoard.c2 = '';
   gameBoard.c3 = '';
@@ -70,62 +65,88 @@ const reset = function () {
   gameBoard.c9 = '';
   gameBoard.winner = '';
   $('#game-board').prepend($board);
+  startGame();
   render()
 }
 
 $(document).ready(function () {
-
-  render()
+  startGame();
+  render();
   //Event handlers for the game board squares:
   //play the value into the gameBoard key for the square
   //check if there is a winner
   //render to the screen
+
+  $('button').on('click', function() {
+    reset();
+  })
+});
+
+const startGame = function () {
   $('#1').on('click', function () {
+    $('#1').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c1');
     gameBoard.winCheck();
     render();
   })
   $('#2').on('click', function () {
+    $('#2').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c2');
     gameBoard.winCheck();
     render();
   })
   $('#3').on('click', function () {
+    $('#3').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c3');
     gameBoard.winCheck();
     render();
   })
   $('#4').on('click', function () {
+    $('#4').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c4');
     gameBoard.winCheck();
     render();
   })
   $('#5').on('click', function () {
+    $('#5').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c5');
     gameBoard.winCheck();
     render();
   })
   $('#6').on('click', function () {
+    $('#6').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c6');
     gameBoard.winCheck();
     render();
   })
   $('#7').on('click', function () {
+    $('#7').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c7');
     gameBoard.winCheck();
     render();
   })
   $('#8').on('click', function () {
+    $('#8').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c8');
     gameBoard.winCheck();
     render();
   })
   $('#9').on('click', function () {
+    $('#9').removeClass('marker').addClass(`${gameBoard.nextTurn}`);
     gameBoard.play('c9');
     gameBoard.winCheck();
     render();
   })
-  $('button').on('click', function() {
-    reset();
-  })
-});
+}
+
+const stopGame = function () {
+  $('#1').off('click');
+  $('#2').off('click');
+  $('#3').off('click');
+  $('#4').off('click');
+  $('#5').off('click');
+  $('#6').off('click');
+  $('#7').off('click');
+  $('#8').off('click');
+  $('#9').off('click');
+}

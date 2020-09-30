@@ -19,7 +19,7 @@ const gameBoard = {
 
   play: function (cell) {
     if (this[cell] !== '') {
-      //flash red
+
     } else if  (this.nextTurn === 'X') {
       this[cell] = 'X';
       this.nextTurn = 'O';
