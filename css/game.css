@@ -37,10 +37,29 @@ h2 {
   font-size: 1em;
 }
 
+.scoreboard {
+  text-align: center;
+  max-width: 40%;
+  margin: 0 auto;
+}
+
+.score {
+  display: inline-block;
+  width: 40%;
+}
 
 #game-board {
   max-width: 40%;
     margin: 0 auto;
+}
+
+#p1-score p{
+  text-align: left;
+}
+
+#p2-score p {
+  text-align: right;
+
 }
 
 table {
@@ -128,6 +147,16 @@ button:hover {
   font-size: 1em;
   width: 200px;
 }
+#board-button-holder {
+  max-width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+.board-buttons {
+  display: inline-block;
+  width: 190px;
+  font-size: 1.22em;
+}
 
 .hidden {
   display: none;
@@ -145,13 +174,13 @@ footer a {
   color: #34345B;
 }
 
-.menus #localMode {
+.menus  {
     margin:0 auto;
     text-align:center;
 
 }
 
-.menus #localMode div {
+.menus div {
   display: inline-block;
   margin: 0 auto;
   height: auto;
@@ -161,7 +190,7 @@ footer a {
   display: inline-block;
 }
 
-.menus #localMode input {
+.menus input {
   display: block;
   text-align: center;
   width: 200px;
@@ -180,7 +209,7 @@ footer a {
   max-width: 200px;
 }
 
-.menus #p1 {
+.menus #p1, #sp {
   background: #f7b5b5;
 }
 
@@ -193,7 +222,7 @@ footer a {
   padding: 5%;
 }
 
-.menus #localMode .token-select  {
+.menus .token-select  {
   display: block;
   margin: 0 auto;
   font-size: 2em;

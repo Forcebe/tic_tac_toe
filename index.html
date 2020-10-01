@@ -47,7 +47,7 @@
             <i class="fas fa-caret-right" id="p1-img-right"></i>
           </div>
 
-          <div class="go-button">
+          <div class="back-button">
             <button type="button" name="back" id="back">Back</button>
           </div>
 
@@ -69,8 +69,30 @@
             <i class="fas fa-caret-right" id="p2-img-right"></i>
           </div>
 
-          <div class="back-button">
+          <div class="go-button">
             <button type="button" name="go" id="go">Go</button>
+          </div>
+      </div>
+    </form>
+
+    <form id="singleplayer" class="hidden">
+      <div class="player-block">
+        <label for="spName">Player Name:</label>
+        <input
+          type='text'
+          id='spName'
+          name='spName'
+          value='X' >
+          <div class="player-token" id='sp'>
+            <img src="images/cross.png" class="token" alt="">
+          </div>
+          <div class="token-select">
+            <i class="fas fa-caret-left" id="sp-img-left"></i>
+            <i class="fas fa-caret-right" id="sp-img-right"></i>
+          </div>
+          <div class="buttons">
+            <button type="button" name="go-sp" id="go-sp">Go</button>
+            <button type="button" name="back-sp" id="back-sp">Back</button>
           </div>
       </div>
     </form>
@@ -78,7 +100,14 @@
 
   <div class="game hidden">
     <h2 id="messages"></h2>
-
+    <div class="scoreboard">
+      <div class="score" id="p1-score">
+        <p></p>
+      </div>
+      <div class="score" id="p2-score">
+        <p></p>
+      </div>
+    </div>
     <div id="game-board">
       <table>
         <tr>
@@ -97,8 +126,11 @@
           <td><div class="marker" id="9"></div></td>
         </tr>
       </table>
-    </div>
-        <button type="button" name="Reset" class="hidden" id="reset">Play again?</button>
+      </div>
+      <div id="board-button-holder">
+        <button type="button" name="Reset" class="hidden board-buttons" id="reset">Play again?</button>
+        <button type="button" name="menu-back" class="hidden board-buttons" id="menu-back">Back to Menu</button>
+      </div>
     </div>
   </div>
 
