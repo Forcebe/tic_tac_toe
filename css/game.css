@@ -236,3 +236,23 @@ footer a {
   color: #AA7E74;
   cursor: pointer;
 }
+
+footer .text {
+  display: block;
+  max-width: 40%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.socials {
+  display: block;
+  width: 40%;
+  font-size: 1.5em;
+  text-align: right;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.socials a:hover {
+  color: #01fddb;
+}
