@@ -4,14 +4,7 @@
 
 //lots of event handlers
 
-//render updates every part of the DOM with the latest values from our
-//gameBoard object.
-
-//board is a holder for the game board when it is detatched to be replaced by a
-//victory message
-let $board;
-
-//Values hold the tokens for either player as a detached jQuery object
+//Array of tokens available for selection stored as HTML strings
 const tokens = [
   '<img src="images/cross.png" alt="" class="token">',
   '<img src="images/circle.png" alt="" class="token">',
@@ -21,33 +14,104 @@ const tokens = [
   '<img src="images/skull.png" alt="" class="token">',
 ];
 
+//Holds the selected token for each player with a default value
 let $token1 = tokens[0];
 let $token2 = tokens[1];
 let $tokenSp = tokens[0];
 
+// holds the game mode
 let mode;
 
+//hides the mode select menu and displays the local mode menu
 const local = function() {
-  $('#modeSelect').addClass('hidden');
-  $('#localMode').removeClass('hidden');
+  $('#mode-select').addClass('hidden');
+  $('#local-mode').removeClass('hidden');
 }
 
+//hides the mode-select menu and displays the singleplayer menu
 const single = function() {
-  $('#modeSelect').addClass('hidden');
+  $('#mode-select').addClass('hidden');
   $('#singleplayer').removeClass('hidden');
 }
 
+//Hides all other scren states, stops game and returns to mode select menu.
+//resets all scores
 const home = function() {
-  $('#localMode').addClass('hidden');
+  $('#local-mode').addClass('hidden');
   $('#singleplayer').addClass('hidden');
   $('.game').addClass('hidden')
-  $('#modeSelect').removeClass('hidden');
+  $('#mode-select').removeClass('hidden');
   $('.menus').removeClass('hidden');
+  gameBoard.winner = '';
+  gameBoard.player1.score = 0;
+  gameBoard.player2.score = 0;
   stopGame();
 }
+//iterators for token selectors
+let token1I = 0;
+let token2I = 1;
 
+//takes a direction from which button was clicked
+const pickToken1 = function (dir) {
+  if (dir === 'right') {
+    //going right, select the next token
+    if (token1I < tokens.length -1 ) {
+      token1I ++
+      $token1 = tokens[token1I];
+    //when you run out of tokens, go back to start
+    } else {
+    token1I = 0
+    $token1 = tokens[token1I];
+    }
+  } else if (dir === 'left') {
+    //going left, select the previous token
+    if (token1I > 0) {
+      token1I --
+      $token1 = tokens[token1I];
+    //when you go back from the first token, go to end
+    } else {
+      token1I = tokens.length -1;
+      $token1 = tokens[token1I];
+    }
+  };
+  //display the selected token on screen
+  $(".menus #p1 img").remove();
+  $(".menus #p1").append($token1)
+};
 
+//takes a direction from which button was clicked
+const pickToken2 = function (dir) {
+  if (dir === 'right') {
+    //going right, select the next token
+    if (token2I < tokens.length -1 ) {
+      token2I ++
+      $token2 = tokens[token2I];
+    //when you run out of tokens, go back to start
+    } else {
+    token2I = 0
+    $token2 = tokens[token2I];
+    }
+  } else if (dir === 'left') {
+    //going left, select the previous token
+    if (token2I > 0) {
+      token2I --
+      $token2 = tokens[token2I];
+    //when you go back from the first token, go to end
+    } else {
+      token2I = tokens.length -1;
+      $token2 = tokens[token2I];
+    }
+  };
+  //display the selected token on screen
+  $(".menus #p2 img").remove();
+  $(".menus #p2").append($token2);
+};
+
+// gets custom entered names and sets them in gameLogic.js, sets p1 to go next
+// hides menus and reveals game board, sets scores to 0, mode to local and
+// runs render.
 const startLocal = function () {
+  console.log('startLocal')
   const p1Name = $('#p1Name').val();
   const p2Name = $('#p2Name').val();
   gameBoard.player1.name = p1Name;
@@ -61,10 +125,48 @@ const startLocal = function () {
   render();
 }
 
+
+// generates a number between 0 and the length of the tokens array to generate
+// a random token for the CPU player
 function randomToken() {
   return Math.floor(Math.random() * Math.floor(tokens.length));
 }
 
+//iterator for single player token selector
+let tokenSpI = 0;
+
+const pickTokenSp = function (dir) {
+  if (dir === 'right') {
+    //going right, select next token
+    if (tokenSpI < tokens.length -1 ) {
+      tokenSpI ++
+      $tokenSp = tokens[tokenSpI];
+    //when you run out go back to start
+    } else {
+    tokenSpI = 0
+    $tokenSp = tokens[tokenSpI];
+    }
+  } else if (dir === 'left') {
+    //going left, select previous token
+    if (tokenSpI > 0) {
+      tokenSpI --
+      $tokenSp = tokens[tokenSpI];
+    //if you try to go back from the first token, go to the last token
+    } else {
+      tokenSpI = tokens.length -1;
+      $tokenSp = tokens[tokenSpI];
+    }
+  };
+  //display selected token on scren
+  $(".menus #sp img").remove();
+  $(".menus #sp").append($tokenSp);
+
+};
+
+// Starts a single player game. Gets p1 name and sets p2 name to 'Computer'.
+// Sets p1 token to the selected token, grabs a random token for the computer.
+// Sets p1 to have first turn, hides menus and shows game, zeros scores and
+// winner, sets mode to single, and runs render
 const startSingle = function () {
   const p1Name = $('#spName').val();
   const p2Name = 'Computer'
@@ -81,24 +183,32 @@ const startSingle = function () {
   mode = 'single'
   render();
 }
-
+//render updates every part of the DOM with the latest values from our
+//gameBoard object. It also displays victory/tie messages & scores
 const render = function () {
   if (gameBoard.winner !== '') {
-    //disable clicks, then display win + reset button
+    //if there is a winner, update score, stop the game and...
     gameBoard.scoreUpdate()
     stopGame();
+    //check for a draw, if not, congratulate the winner
     if (gameBoard.winner !== 'draw') {
       $('#messages').text(`Congratulations ${gameBoard.winner}, You win!`)
     } else {
+      //or print a draw message
       $('#messages').text(`Cat's Game! It's a draw.`)
     }
+    //unhide the reset and go back buttons
     $('#reset, #menu-back').removeClass('hidden');
+  //if there are no winners:
   } else {
+    //displau next turn
     $('#messages').text(`It's ${gameBoard.nextTurn}'s turn`)
   }
+  //update p1 score
   $('#p1-score p').text(
     `${gameBoard.player1.name}: ${gameBoard.player1.score} wins`
   )
+  //update p2 score
   $('#p2-score p').text (
     `${gameBoard.player2.name}: ${gameBoard.player2.score} wins`
   )
@@ -114,6 +224,8 @@ const render = function () {
   printToken('c9', "#9")
 };
 
+// if gameLogic cell is empty, leave it empty. if not, add appropriate player
+//token.
 const printToken = function (c, cell) {
   if (gameBoard[c] === '') {
     $(cell).text('');
@@ -124,8 +236,9 @@ const printToken = function (c, cell) {
   }
 }
 
+//Resets the game setting gameLogic cells & winner to empty, hiding  buttons,
+//starting game and rendering
 const reset = function () {
-  $("#win-message").remove();
   $('#reset button').addClass('hidden');
   $('#game-board div').removeClass('X O').addClass('marker')
   gameBoard.c1 = '';
@@ -138,13 +251,15 @@ const reset = function () {
   gameBoard.c8 = '';
   gameBoard.c9 = '';
   gameBoard.winner = '';
-  $('#game-board').prepend($board);
   startGame();
   render()
 }
 
+// holds click event handlers for each game mode
 const startGame = function () {
   if (mode === 'local') {
+    // for each cell on screen, watch for click, play a token, check win and add
+    //appropriate class then render
     $('#1').on('click', function () {
       gameBoard.play('c1');
       gameBoard.winCheck();
@@ -203,8 +318,9 @@ const startGame = function () {
     })
 
   } else if (mode === 'single') {
+    //for each cell, wait for click, play the AI function, check for a victory
+    //add appropriate class to the cells the player and AI played into, render
     $('#1').on('click', function () {
-      console.log('click')
       gameBoard.easyAiPlay('c1');
       gameBoard.winCheck();
       $('#1').removeClass('marker').addClass(`${gameBoard.c1}`);
@@ -290,6 +406,7 @@ const startGame = function () {
   }
 }
 
+//disables event handlers
 const stopGame = function () {
   $('#1').off('click');
   $('#2').off('click');
@@ -302,80 +419,7 @@ const stopGame = function () {
   $('#9').off('click');
 }
 
-let token1I = 0;
-let token2I = 1;
-let tokenSpI = 0;
 
-const pickToken1 = function (dir) {
-  if (dir === 'right') {
-    if (token1I < tokens.length -1 ) {
-      token1I ++
-      $token1 = tokens[token1I];
-    } else {
-    token1I = 0
-    $token1 = tokens[token1I];
-    }
-
-  } else if (dir === 'left') {
-    if (token1I > 0) {
-      token1I --
-      $token1 = tokens[token1I];
-    } else {
-      token1I = tokens.length -1;
-      $token1 = tokens[token1I];
-    }
-  };
-  $(".menus #p1 img").remove();
-  $(".menus #p1").append($token1)
-};
-
-const pickToken2 = function (dir) {
-  if (dir === 'right') {
-    if (token2I < tokens.length -1 ) {
-      token2I ++
-      $token2 = tokens[token2I];
-    } else {
-    token2I = 0
-    $token2 = tokens[token2I];
-    }
-
-  } else if (dir === 'left') {
-    if (token2I > 0) {
-      token2I --
-      $token2 = tokens[token2I];
-    } else {
-      token2I = tokens.length -1;
-      $token2 = tokens[token2I];
-    }
-  };
-  $(".menus #p2 img").remove();
-  $(".menus #p2").append($token2);
-};
-
-const pickTokenSp = function (dir) {
-  if (dir === 'right') {
-    console.log(tokenSpI)
-    if (tokenSpI < tokens.length -1 ) {
-      tokenSpI ++
-      $tokenSp = tokens[tokenSpI];
-    } else {
-    tokenSpI = 0
-    $tokenSp = tokens[tokenSpI];
-    }
-
-  } else if (dir === 'left') {
-    if (tokenSpI > 0) {
-      tokenSpI --
-      $tokenSp = tokens[tokenSpI];
-    } else {
-      tokenSpI = tokens.length -1;
-      $tokenSp = tokens[tokenSpI];
-    }
-  };
-  $(".menus #sp img").remove();
-  $(".menus #sp").append($tokenSp);
-  console.log(tokenSpI)
-};
 
 $(document).ready(function () {
 //local multiplayer buttons

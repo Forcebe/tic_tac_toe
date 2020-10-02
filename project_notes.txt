@@ -1,9 +1,0 @@
-TO Dos:
-
-
-2. Prettyfy
-CSS style (dark theme)
-Add fonts
-Add colour effects for victory, hover and wrong click
-
-3. Add features

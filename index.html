@@ -18,95 +18,95 @@
   <div class="container">
   <h1><span>Crosstronaught</span></h1>
 
-  <div class="menus">
-    <form id="modeSelect">
-      <button type="button" id='local'>
-        Local Multiplayer
-      </button>
-      <button type="button" id='single'>
-        Single Player
-      </button>
-    </form>
-
-    <form id='localMode' class="hidden">
-      <div class="player-block">
-        <label for="p1Name">Player 1 Name:</label>
-        <input
-          type='text'
-          id='p1Name'
-          name='p1Name'
-          value='X' >
-          <div class="player-token" id='p1'>
-            <img src="images/cross.png" class="token" alt="">
-          </div>
-          <div class="token-select">
-            <i class="fas fa-caret-left" id="p1-img-left"></i>
-            <i class="fas fa-caret-right" id="p1-img-right"></i>
-          </div>
-
-          <div class="back-button">
-            <button type="button" name="back" id="back">Back</button>
-          </div>
-
-      </div>
-      <div class="player-block">
-        <label for="p2Name">Player 2 Name:</label>
-        <input
-          type='text'
-          id='p2Name'
-          name='p2Name'
-          value='O'>
-
+<!-- menus contains all the items that are interacted with before the game starts -->
+    <div class="menus">
+<!-- mode-select allows the player to select a game mode -->
+      <form id="mode-select">
+        <button type="button" id='local'>
+          Local Multiplayer
+        </button>
+        <button type="button" id='single'>
+          Single Player
+        </button>
+      </form>
+<!-- local-mode contains settings for local multiplayer mode -->
+      <form id='local-mode' class="hidden">
+        <!-- settings for the first player -->
+        <div class="player-block">
+          <label for="p1Name">Player 1 Name:</label>
+          <input
+            type='text'
+            id='p1Name'
+            name='p1Name'
+            value='X' >
+            <div class="player-token" id='p1'>
+              <img src="images/cross.png" class="token" alt="">
+            </div>
+            <div class="token-select">
+              <i class="fas fa-caret-left" id="p1-img-left"></i>
+              <i class="fas fa-caret-right" id="p1-img-right"></i>
+            </div>
+            <div class="back-button">
+              <button type="button" name="back" id="back">Back</button>
+            </div>
+        </div>
+        <!-- settings for the second player -->
+        <div class="player-block">
+          <label for="p2Name">Player 2 Name:</label>
+          <input
+            type='text'
+            id='p2Name'
+            name='p2Name'
+            value='O'>
           <div class="player-token" id='p2'>
             <img src="images/circle.png" class="token" alt="">
           </div>
-
           <div class="token-select">
             <i class="fas fa-caret-left" id="p2-img-left"></i>
             <i class="fas fa-caret-right" id="p2-img-right"></i>
           </div>
-
-          <div class="go-button">
+          <div class="back-button">
             <button type="button" name="go" id="go">Go</button>
           </div>
-      </div>
-    </form>
-
-    <form id="singleplayer" class="hidden">
-      <div class="player-block">
-        <label for="spName">Player Name:</label>
-        <input
-          type='text'
-          id='spName'
-          name='spName'
-          value='X' >
-          <div class="player-token" id='sp'>
-            <img src="images/cross.png" class="token" alt="">
-          </div>
-          <div class="token-select">
-            <i class="fas fa-caret-left" id="sp-img-left"></i>
-            <i class="fas fa-caret-right" id="sp-img-right"></i>
-          </div>
-          <div class="buttons">
-            <button type="button" name="go-sp" id="go-sp">Go</button>
-            <button type="button" name="back-sp" id="back-sp">Back</button>
-          </div>
-      </div>
-    </form>
-  </div>
-
+        </div>
+      </form> <!-- end of local multiplayer settings -->
+<!-- settings for single player (vs AI) mode -->
+      <form id="singleplayer" class="hidden">
+        <div class="player-block">
+          <label for="spName">Player Name:</label>
+          <input
+            type='text'
+            id='spName'
+            name='spName'
+            value='X' >
+            <div class="player-token" id='sp'>
+              <img src="images/cross.png" class="token" alt="">
+            </div>
+            <div class="token-select">
+              <i class="fas fa-caret-left" id="sp-img-left"></i>
+              <i class="fas fa-caret-right" id="sp-img-right"></i>
+            </div>
+            <div class="buttons">
+              <button type="button" name="go-sp" id="go-sp">Go</button>
+              <button type="button" name="back-sp" id="back-sp">Back</button>
+            </div>
+        </div>
+      </form> <!--end of singleplayer settings -->
+  </div> <!--end of menus -->
+<!-- contains the game board and associated buttons and messages -->
   <div class="game hidden">
-    <h2 id="messages"></h2>
+    <h2 id="messages"></h2> <!--will hold turn and victory messages -->
     <div class="scoreboard">
       <div class="score" id="p1-score">
-        <p></p>
+        <p></p> <!--will hold player 1 wins -->
       </div>
       <div class="score" id="p2-score">
-        <p></p>
+        <p></p> <!--will hold player 2 wins -->
       </div>
     </div>
-    <div id="game-board">
+    <div id="game-board"> <!--displays the game board. -->
       <table>
+        <!-- Tokens go inside the divs within the tds -->
         <tr>
           <td><div class="marker" id="1"></div></td>
           <td><div class="marker" id="2"></div></td>
@@ -124,12 +124,13 @@
         </tr>
       </table>
       </div>
+      <!--reset board and return to menu buttons. Hidden until a win -->
       <div id="board-button-holder">
         <button type="button" name="Reset" class="hidden board-buttons" id="reset">Play again?</button>
         <button type="button" name="menu-back" class="hidden board-buttons" id="menu-back">Back to Menu</button>
       </div>
-    </div>
-  </div>
+    </div> <!-- end of game -->
+  </div> <!-- container-->
 
   <footer>
     <div class="text">
