@@ -111,7 +111,6 @@ const pickToken2 = function (dir) {
 // hides menus and reveals game board, sets scores to 0, mode to local and
 // runs render.
 const startLocal = function () {
-  console.log('startLocal')
   const p1Name = $('#p1Name').val();
   const p2Name = $('#p2Name').val();
   gameBoard.player1.name = p1Name;
@@ -119,6 +118,7 @@ const startLocal = function () {
   gameBoard.nextTurn = p1Name;
   $('.menus').addClass('hidden');
   $('.game').removeClass('hidden');
+  $('#board-button-holder button').addClass('hidden')
   gameBoard.player1.score = 0
   gameBoard.player2.score = 0
   mode = 'local'
@@ -177,6 +177,7 @@ const startSingle = function () {
   gameBoard.nextTurn = p1Name;
   $('.menus').addClass('hidden');
   $('.game').removeClass('hidden');
+  $('#board-button-holder button').addClass('hidden')
   gameBoard.winner = '';
   gameBoard.player1.score = 0;
   gameBoard.player2.score = 0;
@@ -239,7 +240,7 @@ const printToken = function (c, cell) {
 //Resets the game setting gameLogic cells & winner to empty, hiding  buttons,
 //starting game and rendering
 const reset = function () {
-  $('#reset button').addClass('hidden');
+  $('#board-button-holder button').addClass('hidden')
   $('#game-board div').removeClass('X O').addClass('marker')
   gameBoard.c1 = '';
   gameBoard.c2 = '';

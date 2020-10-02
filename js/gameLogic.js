@@ -83,7 +83,6 @@ const gameBoard = {
       } else if (this.c1 === 'O') {
         this.winner = this.player2.name
       }
-    console.log('top row')
     //first column
     } else if (this.c1 !== '' && this.c1 === this.c4 && this.c4 === this.c7) {
       if (this.c1 === 'X') {
